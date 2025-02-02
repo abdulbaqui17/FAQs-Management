@@ -1,96 +1,102 @@
-# FAQs-Management
-FAQ Management System with Multilingual Support
+# FAQ Management System with Multilingual Support
 
-React.js
-Quill.js
-Node.js
-Express.js
-MongoDB
-Redis
+![React](https://img.shields.io/badge/React-18-blue)
+![Express](https://img.shields.io/badge/Express-4.18-green)
+![MongoDB](https://img.shields.io/badge/MongoDB-7.0-green)
+![Redis](https://img.shields.io/badge/Redis-7.2-red)
 
 A full-stack application for managing FAQs with real-time translation support (English, Hindi, Bengali) and Redis caching.
 
-Features
-🌐 Multilingual FAQ management (EN/HI/BN)
+## Features
 
-✍️ Rich text editor for answers
+- 🌐 Multilingual FAQ management (EN/HI/BN)
+- ✍️ Rich text editor for answers
+- ⚡ Redis caching for fast responses
+- 🔄 Automatic translation using Google Cloud API
+- 🐳 Dockerized development environment
+- 📱 Responsive UI with animations
 
-⚡ Redis caching for fast responses
+## Screenshots
 
-🔄 Automatic translation using Google Cloud API
+| Hindi Interface | Bengali Interface |  Bn Api Interface |
+|-------------------|-----------------|-------------------|
+| <img src="https://github.com/user-attachments/assets/b2a2637f-5962-4a5b-bc9c-eca714f52d30" width="400"> | <img src="https://github.com/user-attachments/assets/3221bf0c-6e2b-45c5-8d27-5f1f1e310221" width="400"> | <img src="https://github.com/user-attachments/assets/5e674523-01ea-4ae0-9462-6476cfd5c372" width="400"> |
 
-🐳 Dockerized development environment
+## Installation
 
-📱 Responsive UI with animations
+### Prerequisites
+- Docker & Docker Compose
+- Google Cloud API key (Translation API)
+- Node.js 18+ (for manual setup)
 
-Screenshots
+### Using Docker (Recommended)
+```bash
+git clone https://github.com/abdulbaqui17/FAQs-Management.git
+cd FAQs-Management
 
-FAQ Interface
-<img width="1432" alt="Screenshot 2025-02-02 at 12 42 04 PM" src="https://github.com/user-attachments/assets/b2a2637f-5962-4a5b-bc9c-eca714f52d30" />
+# Set up environment variables (create .env file in backend folder)
+you can directly past you key in index.js file line 14 ( const translate = new Translate({ key: "" }); ) 
+echo "GOOGLE_TRANSLATE_KEY=your_api_key" > backend/.env
 
-FAQ management interface with language selector
-<img width="1435" alt="Screenshot 2025-02-02 at 12 43 04 PM" src="https://github.com/user-attachments/assets/3221bf0c-6e2b-45c5-8d27-5f1f1e310221" />
+# Start services
+docker-compose up --build -d
 
-Translation Demo
-<img width="1413" alt="Screenshot 2025-02-02 at 12 48 25 PM" src="https://github.com/user-attachments/assets/5e674523-01ea-4ae0-9462-6476cfd5c372" />
-<img width="1413" alt="Screenshot 2025-02-02 at 12 49 13 PM" src="https://github.com/user-attachments/assets/bbdfb86b-4bf7-44a0-a8d0-f947bd2ffb61" />
-
-# Installation Prerequisites
-
-Docker & Docker Compose
-
-# Google Cloud API key (Translation API)
-
-Node.js 18+ (for manual setup)
-
-# Using Docker (Recommended)
-
-# git clone https://github.com/abdulbaqui17/FAQs-Management.git
-
-cd faqs-management
-
-# Set up environment variables
-you can directly past you key in index.js file line 14 ( const translate = new Translate({ key: "" }); ) or create touch .env in backend folder
-
-# docker-compose up -d (or) docker-compose up --build
-
-client http://localhost:5173/
-
-server http://localhost:3000/
-
-# Manual Setup
-# Backend
+# Access endpoints:
+# Frontend: http://localhost:5173
+# Backend: http://localhost:3000
+```
+### Manual Setup
+Backend:
+```bash
 cd backend
 npm install
-echo "MONGO_URL=mongodb://localhost:27017/faqs" >> .env start mongodb instance docker or locally
-echo "REDIS_URL=redis://localhost:6379" >> .env redis instance docker or locally
-echo "GOOGLE_TRANSLATE_KEY=your_api_key" >> .env get api key from google cloud console
-npm run dev
 
-# Frontend
+# Create .env file
+echo "MONGO_URL=mongodb://localhost:27017/faqs" >> .env
+echo "REDIS_URL=redis://localhost:6379" >> .env
+echo "GOOGLE_TRANSLATE_KEY=your_api_key" >> .env
+
+# Start server
+npm run dev
+```
+### Frontend:
+```bash
 cd ../frontend
 npm install
 npm run dev
+```
+### API Documentation
 
-# API Documentation
-Create FAQ
-
+#### Create FAQ
+```bash
 POST http://localhost:3000/api/faqs
+Content-Type: application/json
 
 {
   "question": "How do I reset my password?",
   "answer": "<p>Visit the password reset page...</p>"
 }
+```
 
-# Get FAQs
+#### Get FAQs
+
 GET http://localhost:3000/api/faqs
-
 GET http://localhost:3000/api/faqs?lang=hi
-
 GET http://localhost:3000/api/faqs?lang=bn
 
-Technology Stack
-Frontend:
+
+```
+GET http://localhost:3000/api/faqs?lang=hi
+[
+  {
+    "question": "आपका क्या नाम है?",
+    "answer": "\u003Cp\u003Emy name is abdul baqui\u003C/p\u003E"
+  }
+]
+```
+
+## Technology Stack
+### Frontend:
 
 React + Vite
 
@@ -98,7 +104,7 @@ Quill Rich Text Editor
 
 Framer Motion animations
 
-Backend:
+### Backend:
 
 Express.js
 
@@ -108,7 +114,7 @@ Redis caching
 
 MongoDB
 
-Infrastructure:
+### Infrastructure:
 
 Docker Compose
 
